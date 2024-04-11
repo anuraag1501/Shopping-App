@@ -8,7 +8,9 @@ export const Cartitem = ({ item, itemIndex }) => {
   const dispatch = useDispatch();
   const removeFromCart = () => {
     dispatch(remove(item.id));
-    toast.error("Removed from cart!")
+    toast.error("Removed from cart!", {
+      position: "top-center"
+    })
   }
 
   return (

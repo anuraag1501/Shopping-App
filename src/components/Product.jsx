@@ -8,13 +8,17 @@ export const Product = ({post}) => {
 
   const addToCart = () => {
     dispatch(add(post));
-    toast.success("Added to cart!")
+    toast.success("Added to cart!", {
+      position: "top-center"
+    })
     
   }
 
   const removeFromCart = () => {
     dispatch(remove(post.id));
-    toast.error("Removed from cart!")
+    toast.error("Removed from cart!", {
+      position: "top-center"
+    })
   }
 
   return (
