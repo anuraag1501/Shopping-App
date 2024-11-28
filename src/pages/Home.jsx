@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {Product} from "../components/Product";
+import { Product } from "../components/Product";
 import { Spinner } from '../components/Spinner';
 
 export const Home = () => {
@@ -7,38 +7,40 @@ export const Home = () => {
   const [loading, setLoading] = useState(false);
   const [posts, setPosts] = useState([]);
 
-  async function fetchProductData(){
+  async function fetchProductData() {
     setLoading(true);
-    try{
+    try {
       let res = await fetch(API_URL);
       let data = await res.json();
       setPosts(data);
-    }catch(error){
+    } catch (error) {
       console.log("Error fetching product list");
       setPosts([]);
     }
     setLoading(false);
   }
 
-  useEffect(() =>{
+  useEffect(() => {
     fetchProductData();
-  },[]);
+  }, []);
 
   return (
-    <div>
+    <div className='h-full overflow-y-scroll'>
       {
-        loading ? <Spinner /> 
-        :
-        ( posts.length > 0 ? 
+        loading
+          ?
+          <Spinner />
+          :
+          (posts.length > 0 ?
             (<div className='grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-6xl p-2 mx-auto space-y-10 space-x-5 min-h-[80vh]'>
-              { posts.map((post) => <Product key={post.id} post={post} />) }
-            </div>) 
+              {posts.map((post) => <Product key={post.id} post={post} />)}
+            </div>)
             :
             (<div className='flex justify-center items-center'>
               No Data Found!
             </div>
             )
-        ) 
+          )
       }
     </div>
   )
